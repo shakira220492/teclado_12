@@ -1,0 +1,23 @@
+#songInformation {
+    position: absolute;
+/*    background-color: #1ab7ea;*/
+    top: 0px;
+    height: 80px;
+    left: 0px;
+    width: 100%;
+    overflow-y: hidden;
+    border-bottom-color: gray;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+}
+
+#commentSection {
+    position: absolute;
+/*    background-color: red;*/
+    top: 90px;
+    height: 320px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: block;
+}

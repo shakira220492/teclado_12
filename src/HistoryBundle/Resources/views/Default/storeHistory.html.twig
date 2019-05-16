@@ -1,0 +1,25 @@
+{{ form_start(store_history_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'store-history-ajax'|default('form')} }) }}
+{{ form_end(store_history_form_ajax) }}
+
+<script>
+    function storeHistory()
+    {
+        var form = $('#store-history-ajax');
+        var url = form.attr('action');
+
+        $.post(url,
+        {
+            current_video_id: current_video_id
+        },
+        function (data)
+        {
+
+            var userId = data[0].userId;
+            var useripId = data[0].useripId;
+            var current_video_id = data[0].current_video_id;
+            
+        }).fail(function () {
+            alert("ERROR store-history-ajax");
+        });
+    }
+</script>

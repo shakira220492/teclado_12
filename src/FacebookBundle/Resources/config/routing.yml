@@ -1,0 +1,3 @@
+facebook_homepage:
+    path:     /facebook
+    defaults: { _controller: FacebookBundle:Default:index }

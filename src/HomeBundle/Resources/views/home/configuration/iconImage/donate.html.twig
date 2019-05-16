@@ -1,0 +1,82 @@
+<style>
+    #donateArea {
+        position: absolute;
+        height: 90px;
+        width: 250px;
+        top: 175px;
+        left: 15px;
+        z-index: 2;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-top-left-radius: 0px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+        cursor: pointer;
+        overflow: scroll;
+        color: white;
+        transition-property: all;
+        transition-duration: 0.5s;
+    }
+    
+    
+    #displaceToRight {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        top: 175px;
+        left: 15px;
+        z-index: 3;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-bottom-right-radius: 15px;
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+        cursor: pointer;
+    }
+</style>
+
+<div id='displaceToRight' {#class='animatedButton'#}>
+</div>
+
+<div id='donateArea' >
+    <label style="position: absolute; top: 10px; left: 0px; right: 0px;">Amount to donate to this video: </label>
+    <input style="position: absolute; top: 40px; left: 0px; right: 0px; "type=number name="target_coin_amount" size="4" placeholder="Amount of coins"/>
+    
+    <div {#id="payment_options"#} style="position: absolute; top: 38px; left: 155px; right: 0px;">
+        {{ include('@Paypal/Default/index.html.twig') }}
+        {{ include('@PayU/Default/index.html.twig') }}
+    </div>
+</div>
+
+<script>
+
+    var displaceToRight = document.getElementById("displaceToRight");
+    displaceToRight.addEventListener("click", displayDonateArea, false);
+    var statusDonateArea = 0;
+
+    function displayDonateArea()
+    {
+        var donateArea = document.getElementById("donateArea");
+
+        if (statusDonateArea === 0)
+        { {#alert("0");#}
+            donateArea.style.width = "250px";
+            donateArea.style.height = "90px";
+            statusDonateArea = 1;
+        } else
+        { {#alert("1");#}
+            donateArea.style.width = "0px";
+            donateArea.style.height = "0px";
+            statusDonateArea = 0;
+        }
+
+    }
+
+
+
+</script>

@@ -1,0 +1,87 @@
+{{ form_start(get_videos_to_delete_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-videos-to-delete-ajax'|default('form')} }) }}
+{{ form_end(get_videos_to_delete_form_ajax) }}
+
+{{ form_start(check_videos_to_delete_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'check-videos-to-delete-ajax'|default('form')} }) }}
+{{ form_end(check_videos_to_delete_form_ajax) }}
+
+<div id="declineDeleteVideo_form">
+    {{ include('@DeleteVideo/Default/declineDeleteVideo.html.twig') }}
+</div>
+
+<div id="deleteVideo_form">
+    {{ include('@DeleteVideo/Default/deleteVideo.html.twig') }}
+</div>
+
+<script>
+    
+    function DeleteVideoBundle()
+    {
+        checkVideosToDelete(); {#NOTA: esta funcion me alimina automaticamente del sistema los videos que cumplan los 30 dias de plazo pactado desde que el usuario solicita la eliminacion del video#}
+                
+        var id = $("#video_Profile"+edit_video_id).data('id2');
+                
+        if (id === "dont_delete_video")
+        {
+            document.getElementById("declineDeleteVideo_form").style.display = "none";
+            document.getElementById("deleteVideo_form").style.display = "block";
+            draw_deleteVideoForm();
+        } else if (id === "delete_video")
+        {
+            document.getElementById("declineDeleteVideo_form").style.display = "block";
+            document.getElementById("deleteVideo_form").style.display = "none";
+            draw_declineDeleteVideoForm();
+        }                
+    }
+    
+
+    function checkVideosToDelete()
+    {
+        var form = $('#check-videos-to-delete-ajax');
+        var url = form.attr('action');
+
+        $.post(url, function (data)
+        {
+            {#alert("check-videos-to-delete-ajax");#}
+        }).fail(function () {
+            alert('ERROR check-videos-to-delete-ajax');
+        });
+    }
+    
+    
+    function getVideosToDelete()
+    {
+        var form = $('#get-videos-to-delete-ajax');
+        var url = form.attr('action');
+
+        $.post(url, function (data)
+        {
+            var amountVideos = data[0].amountVideos;
+            
+            for (i=0; i<amountVideos; i++)
+            {
+                var videoId = data[i].videoId;
+                var videoName = data[i].videoName;
+                var videoDescription = data[i].videoDescription;
+                var videoImage = data[i].videoImage;
+                var videoContent = data[i].videoContent;
+                var videoUpdatedate = data[i].videoUpdatedate;
+                var videoAmountViews = data[i].videoAmountViews;
+                var videoAmountComments = data[i].videoAmountComments;
+                var videoLikes = data[i].videoLikes;
+                var videoDislikes = data[i].videoDislikes;
+                var userId = data[i].userId;
+                var userName = data[i].userName;
+                var datetodelete = data[i].datetodelete;
+                
+                var video_Profile_id = "video_Profile" + videoId;
+                var video_Profile = document.getElementById(video_Profile_id);
+                video_Profile.style.backgroundColor = "red";
+                $("#video_Profile"+videoId).data('id2', 'delete_video');
+                $("#video_Profile"+videoId).data('id3', datetodelete);
+            }
+        }).fail(function () {
+            alert('ERROR .. getVideosToDelete-ajax');
+        });
+    }
+    
+</script>

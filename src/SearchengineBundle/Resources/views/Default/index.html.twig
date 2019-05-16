@@ -1,0 +1,164 @@
+{{ include('@History/Default/index.html.twig') }} 
+{{ include('@Searchengine/Default/dataminingResults.html.twig') }} 
+{{ include('@Searchengine/Default/historyResults.html.twig') }} 
+{{ include('@Searchengine/Default/searchResults.html.twig') }} 
+
+<div id="searchEngineMachine_environment">
+    <input type="text" id="searchEngineMachine" placeholder="JBSB92" name="keyword"/>
+</div>
+
+
+
+
+
+
+
+
+<div id='searchIconButton' class="animatedButton">
+    <img id='searchIconButton_image' src="files/images/icons/presentation/search.png" alt="Mountain View">
+</div>
+
+<div id='historyIconButton' class="animatedButton">
+    <img id='historyIconButton_image' src="files/images/icons/presentation/history.png" alt="Mountain View">
+</div>
+
+<div id='dataminingIconButton' class="animatedButton">
+    <img id='dataminingIconButton_image' src="files/images/icons/presentation/datamining.png" alt="Mountain View">
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="searchResults" class='visibleScroll' data-id1=0>
+</div>
+
+<script>
+    
+    function SearchengineBundle()
+    {
+        document.getElementById('searchResults').innerHTML = "";
+        var event = "load";
+        var amountVideosViewed = 0;
+        getMostViewedVideos(amountVideosViewed, event);
+        amountVideosViewed+=30;
+        $("#searchResults").data('id1', amountVideosViewed);
+        resultStatus = "datamining";
+    }
+    
+    
+    
+    
+
+    $('#searchResults')
+    .scroll(function () {
+        var searchResults = document.getElementById("searchResults");
+
+        var a = searchResults.scrollHeight;
+        var b = searchResults.scrollTop;
+        var c = searchResults.clientHeight;
+
+        if (b+c === a)
+        {
+            var amountVideosViewed = $("#searchResults").data('id1');
+            var event = "scroll";
+            
+            
+            if (resultStatus === "search")
+            {
+                searchKeyword(amountVideosViewed, event);
+            }
+            
+            if (resultStatus === "history")
+            {
+                getHistorySongs(amountVideosViewed, event); // HistoryBundle
+            }
+            
+            if (resultStatus === "datamining")
+            {
+                getMostViewedVideos(amountVideosViewed, event); // SearchengineBundle->index.html.twig
+            }
+            
+            
+            
+            
+            
+            amountVideosViewed+=30;
+            $("#searchResults").data('id1', amountVideosViewed); {#alert("fin123: a "+a+" c "+c+" a "+a);#}
+        }
+    })
+    .mouseover(function () {
+        var searchResults = document.getElementById("searchResults");
+        searchResults.classList.add("visibleScroll");
+    })
+    .mouseout(function () {
+        var searchResults = document.getElementById("searchResults");
+        searchResults.classList.remove("visibleScroll");
+    });
+    
+    
+    
+    
+</script>
+
+
+
+
+
+<script>
+    
+    
+    $('#searchEngineMachine')
+    .keyup(function (e) {
+        if (e.keyCode === 13)
+        {
+            document.getElementById('searchResults').innerHTML = "";
+            var amountVideosViewed = 0;
+            var event = "keyup";
+            storeCurrentKeywords();
+            searchKeyword(amountVideosViewed, event);
+            amountVideosViewed+=30;
+            $("#searchResults").data('id1', amountVideosViewed);
+            resultStatus = "search";
+        }
+    });
+    
+    $("#searchIconButton")
+    .click(function () {
+        document.getElementById('searchResults').innerHTML = "";
+        var amountVideosViewed = 0;
+        var event = "click";
+        storeCurrentKeywords();
+        searchKeyword(amountVideosViewed, event);
+        amountVideosViewed+=30;
+        $("#searchResults").data('id1', amountVideosViewed);
+        resultStatus = "search";
+    });
+    
+    $("#historyIconButton")
+    .click(function () {
+        document.getElementById('searchResults').innerHTML = "";
+        var amountVideosViewed = 0;
+        var event = "click";
+        getHistorySongs(amountVideosViewed, event); // HistoryBundle
+        amountVideosViewed+=30;
+        $("#searchResults").data('id1', amountVideosViewed);
+        resultStatus = "history";
+    });
+    
+    $("#dataminingIconButton")
+    .click(function () {
+        document.getElementById('searchResults').innerHTML = "";
+        var amountVideosViewed = 0;
+        var event = "click";
+        getMostViewedVideos(amountVideosViewed, event); // SearchengineBundle->index.html.twig
+        amountVideosViewed+=30;
+        $("#searchResults").data('id1', amountVideosViewed);
+        resultStatus = "datamining";
+    });
+</script>

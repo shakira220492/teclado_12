@@ -1,0 +1,26 @@
+{{ form_start(store_datamining_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'store-datamining-ajax'|default('form')} }) }}
+{{ form_end(store_datamining_form_ajax) }}
+
+<script>
+    function storeDatamining()
+    {
+        {#alert("storeDatamining() "+current_video_id);#}
+        
+        var form = $('#store-datamining-ajax');
+        var url = form.attr('action');
+
+        $.post(url,
+        {
+            current_video_id: current_video_id
+        },
+        function (data)
+        {
+
+            var dataminingListId = data[0].dataminingListId;
+            alert("dataminingListId: "+dataminingListId);
+            
+        }).fail(function () {
+            alert("ERROR store-datamining-ajax");
+        });
+    }
+</script>

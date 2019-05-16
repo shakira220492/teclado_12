@@ -1,0 +1,60 @@
+<?php
+
+namespace HomeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Purchasedproduct
+ *
+ * @ORM\Table(name="purchasedProduct", indexes={@ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="product_id", columns={"product_id"})})
+ * @ORM\Entity
+ */
+class Purchasedproduct
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="purchasedProduct_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $purchasedproductId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="purchasedProduct_date", type="datetime", nullable=false)
+     */
+    private $purchasedproductDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="purchasedProduct_amount", type="integer", nullable=false)
+     */
+    private $purchasedproductAmount;
+
+    /**
+     * @var \Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="product_id")
+     * })
+     */
+    private $product;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     * })
+     */
+    private $user;
+
+
+}
+

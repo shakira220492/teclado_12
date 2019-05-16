@@ -1,0 +1,216 @@
+{{ form_start(add_to_shopping_cart_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'add-to-shopping-cart-ajax'|default('form')} }) }}
+{{ form_end(add_to_shopping_cart_form_ajax) }}
+
+{{ form_start(get_products_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-products-ajax'|default('form')} }) }}
+{{ form_end(get_products_form_ajax) }}
+
+<div id="product_list"
+     data-id1=0>
+    <div id="product_item">
+    </div>
+</div>
+
+<script>
+    window.onload = get_products(0);
+    
+    function get_products(amountProductsViewed)
+    {
+        var form = $('#get-products-ajax');
+        var url = form.attr('action');
+
+        $.post(url, {amountProductsViewed: amountProductsViewed}, function (data)
+        {
+            var amountProducts = data[0].amountProducts;
+            
+            for (i=0; i<amountProducts; i++)
+            {
+                var productId = data[i].productId;
+                var productName = data[i].productName;
+                var productPrice = data[i].productPrice;
+                var productDescription = data[i].productDescription;
+                var productImage = data[i].productImage;
+
+
+                drawProduct_productList(
+                    productId, 
+                    productName, 
+                    productPrice, 
+                    productDescription, 
+                    productImage
+                );
+        
+            }
+        }).fail(function () {
+            alert('ERROR get-products-ajax');
+        });
+    }
+    
+    $('#product_list')
+    .scroll(function () {
+        var product_list = document.getElementById("product_list");
+
+        var a = product_list.scrollHeight;
+        var b = product_list.scrollTop;
+        var c = product_list.clientHeight;
+
+        if (b+c === a)
+        {
+            var amountProductsViewed = $("#product_list").data('id1');
+            amountProductsViewed+=30;
+            $("#product_list").data('id1', amountProductsViewed);
+            get_products(amountProductsViewed);
+        }
+    })
+    .mouseover(function () {
+        var product_list = document.getElementById("product_list");
+        product_list.classList.add("visibleScroll");
+    })
+    .mouseout(function () {
+        var product_list = document.getElementById("product_list");
+        product_list.classList.remove("visibleScroll");
+    });
+</script>
+
+
+
+
+
+
+
+<script>
+
+    function drawProduct_productList(
+        productId, 
+        productName, 
+        productPrice, 
+        productDescription, 
+        productImage
+    )
+    {
+        $("#product_list").append(
+            "<div id='productPortrait_div"+productId+"' style='position: relative; width:100%; cursor: pointer; overflow: hidden;' "
+                +" data-id1='"+productId+"'"
+                +" data-id2='"+productName+"'"
+                +" data-id3='"+productDescription+"'"
+                +" >"
+
+                +"<table border='0' width='100%'>"
+                +"<tr height='120px'>"
+                    +"<td width='170px' height='100px'>"
+                        +"<div id='productPortrait_"+productId+"' class='productPortrait_'>"
+                            +"<img style='"
+                            +"height:100%; cursor: pointer;"
+                            +"opacity: 0.9; "
+                            +"z-index: 1;' "
+                            +"src='files/products/"+productImage+"' "
+                            +"alt='Mountain View'>"
+                        +"</div>"
+                        +"<div id='productContaint_"+productId+"' class='productContaint_'>"
+                            +" <b>"+productName+"</b><br>"
+                            +" "+productPrice+"<br>"
+                        +"</div>"
+                
+                        +"<input type='number' id='amountProducts_"+productId+"' class='amountProducts_ animatedButton' value='1' />"
+                
+                        +"<div id='shoppingCart_"+productId+"' class='shoppingCart_ animatedButton' >"
+                            +"<img style='"
+                            +"height:20px; width:20px;' "
+                            +"src='files/images/icons/shoppingCart.png' "
+                            +"alt='Mountain View'>"
+                        +"</div>"
+                    +"</td>"
+                +"</tr>"
+                +"</table>"
+
+            +"</div>"
+        );
+
+        $('#product_list')
+        .mouseover(function () {
+            document.getElementById("product_list").style.opacity = 1;
+        })
+        .mouseout(function () {
+            document.getElementById("product_list").style.opacity = 0.5;
+        });
+
+        $('#productPortrait_div'+productId)
+        .mouseover(function () {
+            document.getElementById("productPortrait_"+productId).style.opacity = 0.5;
+            document.getElementById("productContaint_"+productId).style.opacity = 1;
+            document.getElementById("shoppingCart_"+productId).style.opacity = 1;
+            document.getElementById("amountProducts_"+productId).style.opacity = 1;
+        })
+        .mouseout(function () {
+            document.getElementById("productPortrait_"+productId).style.opacity = 1;
+            document.getElementById("productContaint_"+productId).style.opacity = 0;
+            document.getElementById("shoppingCart_"+productId).style.opacity = 0;
+            document.getElementById("amountProducts_"+productId).style.opacity = 0;
+        });
+        
+        $('#shoppingCart_'+productId)
+        .click(function () {
+            
+            var amountProducts = document.getElementById("amountProducts_"+productId).value;
+            
+            if (amountProducts==='')
+            {
+                amountProducts = 1;
+            }
+            
+            addToShoppingCart(
+                productId, 
+                productName, 
+                productPrice, 
+                productDescription, 
+                productImage,
+                amountProducts
+            );
+        });
+        
+    }
+
+    function addToShoppingCart(
+        productId, 
+        productName, 
+        productPrice, 
+        productDescription, 
+        productImage,
+        amountProducts
+    )
+    {
+        var form = $('#add-to-shopping-cart-ajax');
+        var url = form.attr('action');
+
+        $.post(url, {
+            productId: productId,
+            amountProducts: amountProducts
+        }, function (data)
+        {
+            var selectedproductId = data[0].selectedproductId;
+            var selectedproductDate = data[0].selectedproductDate;
+            var selectedproductAmount = data[0].selectedproductAmount;
+            
+            {#alert("add-to-shopping-cart-ajax");#}
+                                     
+
+
+                drawProduct_shoppingList(
+                    productId, 
+                    productName, 
+                    productPrice, 
+                    productDescription, 
+                    productImage,
+                    selectedproductId,
+                    selectedproductDate,
+                    selectedproductAmount
+                );
+    
+            document.getElementById("productList_environment").style.display = "none";
+            document.getElementById("shoppingCart_environment").style.display = "block";
+            
+        }).fail(function () {
+            alert('ERROR add-to-shopping-cart-ajax');
+        });
+    }
+
+</script>

@@ -1,0 +1,4 @@
+store_history_form:
+    path:     /storeHistory
+    defaults: { _controller: HistoryBundle:Default:storeHistory }
+    methods:  POST

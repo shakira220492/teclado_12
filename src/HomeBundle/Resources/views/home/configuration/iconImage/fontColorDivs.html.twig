@@ -1,0 +1,93 @@
+<style>
+    #filterIconButton {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        top: 160px;
+        left: 15px;
+        z-index: 3;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-top-right-radius: 15px;
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+        cursor: pointer;
+    }
+    
+</style>
+
+<div id='filterIconButton' {#class='animatedButton'#}>
+    
+</div>
+
+<script>
+    
+    $('#filterIconButton')
+    .click(function () { 
+        update_windowThemeColor();
+
+        paintWindowProperties();
+    });
+    
+    function update_windowThemeColor()
+    {
+        if (windowThemecolor === 0)
+        {
+            windowThemecolor = 1; 
+        }
+        else 
+        {
+            windowThemecolor = 0;
+        }
+    }
+    
+    function paintWindowProperties()
+    {
+        var window_background = document.getElementById("window_background"); // PresentationBundle
+        var configurationArea_content = document.getElementById("configurationArea_content"); // ConfigurationBundle // eliminar
+        var sessionArea = document.getElementById("sessionArea"); // SessionBundle // eliminar
+        var searchArea = document.getElementById("searchArea"); // SessionBundle // eliminar
+        
+        var songIconButton = document.getElementById("songIconButton");
+        var artistIconButton = document.getElementById("artistIconButton");
+
+        if (windowThemecolor === 0)
+        {
+            // window
+            window_background.style.backgroundColor = "black";
+            
+            // fontColor
+            configurationArea_content.classList.add("oscuro");
+            sessionArea.classList.add("oscuro");
+            searchArea.classList.add("oscuro");
+            songIconButton.classList.add("oscuro");
+            artistIconButton.classList.add("oscuro");
+            
+            configurationArea_content.classList.remove("claro");
+            sessionArea.classList.remove("claro");
+            searchArea.classList.remove("claro");
+            songIconButton.classList.remove("claro");
+            artistIconButton.classList.remove("claro");
+            
+        } else 
+        {
+            //window
+            window_background.style.backgroundColor = "white";
+            
+            // fontColor
+            configurationArea_content.classList.add("claro");
+            sessionArea.classList.add("claro");
+            searchArea.classList.add("claro");
+            songIconButton.classList.add("claro");
+            artistIconButton.classList.add("claro");
+            
+            configurationArea_content.classList.remove("oscuro");
+            sessionArea.classList.remove("oscuro");
+            searchArea.classList.remove("oscuro");
+            songIconButton.classList.remove("oscuro");
+            artistIconButton.classList.remove("oscuro");
+            
+        }
+    }
+    
+</script>

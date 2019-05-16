@@ -1,0 +1,70 @@
+{{ form_start(get_history_songs_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-history-songs-ajax'|default('form')} }) }}
+{{ form_end(get_history_songs_form_ajax) }}
+
+<script>
+    function getHistorySongs(amountVideosViewed, event)
+    { 
+        var form = $('#get-history-songs-ajax');
+        var url = form.attr('action');
+
+        $.post(url, {
+            amountVideosViewed: amountVideosViewed
+        }, function (data)
+        {
+            var amountVideos = data[0].amountVideos;
+            
+{#            drawNoResult(event, amountVideos);#}
+            
+            for (i = 0; i < amountVideos; i++)
+            {
+                
+                var videoId = data[i].videoId;
+                var videoName = data[i].videoName;
+                var videoDescription = data[i].videoDescription;
+                var videoImage = data[i].videoImage;
+                var videoContent = data[i].videoContent;
+                var videoUpdatedate = data[i].videoUpdatedate;
+                var videoAmountViews = data[i].videoAmountViews;
+                var videoAmountComments = data[i].videoAmountComments;
+                var videoLikes = data[i].videoLikes;
+                var videoDislikes = data[i].videoDislikes;
+                var userId = data[i].userId;
+                var userName = data[i].userName;
+                var historyId = data[i].historyId;
+                var amountVideos = data[i].amountVideos;
+                
+                var percentageLikes = (100 * videoLikes) / (videoLikes + videoDislikes);
+                var percentageDislikes = (100 * videoDislikes) / (videoLikes + videoDislikes);
+                
+                var kindOfList = "historyResults";
+                var listId = userId;
+                var videoOrderPosition = 0;
+                
+                appendVideoToSearchEngineDiv(
+                    videoId,
+                    videoName,
+                    videoDescription,
+                    videoImage,
+                    videoContent,
+                    videoUpdatedate,
+                    videoAmountViews,
+                    videoAmountComments,
+                    videoLikes,
+                    videoDislikes,
+                    userId,
+                    userName,
+                    amountVideos,
+                    percentageLikes,
+                    percentageDislikes,
+                    historyId,
+                    kindOfList,
+                    listId,
+                    videoOrderPosition
+                );
+                
+            }
+        }).fail(function () {
+            alert('ERROR #get-history-songs-ajax');
+        });
+    }
+</script>

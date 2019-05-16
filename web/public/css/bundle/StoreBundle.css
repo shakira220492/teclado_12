@@ -1,0 +1,148 @@
+#product_list {
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+    right: 0px; 
+    bottom: 0px; 
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
+
+#product_list_icon {
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    width: 30px;
+    height: 30px;
+}
+
+#shopping_list {
+    position: absolute;
+    top: 30px;
+    left: 0px; 
+    right: 0px; 
+    bottom: 0px; 
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    opacity: 0.5;
+}
+
+#shopping_environment {
+    position: absolute;
+    top: 30px;
+    left: 0px; 
+    right: 0px; 
+    bottom: 0px; 
+    display: none;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+}
+
+
+
+
+#shoppingCart {
+    position: absolute;
+/*    background-color: white;*/
+    top: 0px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+/*    color: black;*/
+/*    border-radius: 5px;*/
+}
+
+.productPortrait_
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow:hidden;
+    height:120px;
+    width:170px;
+    text-align:center;
+    background-color: white;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.5s;
+    z-index: 1;
+}
+
+.productContaint_
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition-property: all;
+    transition-duration: 0.5s;
+    height: 5px;
+    width: 100%;
+    z-index: 2;
+}
+
+.amountProducts_
+{
+    position: absolute;
+    top: 50px; 
+    right: 30px; 
+    cursor: text; 
+    /*border-radius: 15px;*/
+    z-index: 3;
+    opacity: 0;
+    width: 60px;
+    color: black;
+}
+
+.shoppingCart_
+{
+    position: absolute;
+    top: 50px; 
+    right: 10px; 
+    cursor: pointer; 
+    /*border-radius: 15px;*/
+    z-index: 3;
+    opacity: 0;
+}
+
+.deleteSelectedProduct_
+{
+    position: absolute;
+    top: 50px; 
+    right: 10px; 
+    cursor: pointer; 
+    /*border-radius: 15px;*/
+    z-index: 3;
+    opacity: 0;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+
+.selectedProductPortrait_
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow:hidden;
+    height:120px;
+    width:170px;
+    text-align:center;
+    background-color: white;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.5s;
+    z-index: 1;
+}
+
+.selectedProductContaint_
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition-property: all;
+    transition-duration: 0.5s;
+    height: 5px;
+    width: 100%;
+    z-index: 2;
+}

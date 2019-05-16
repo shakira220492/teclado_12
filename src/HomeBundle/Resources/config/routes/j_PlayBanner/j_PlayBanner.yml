@@ -1,0 +1,14 @@
+get_video_speed_form:
+    path:     /getVideoSpeed
+    defaults: { _controller: PlayBannerBundle:Default:getVideoSpeed }
+    methods:  POST
+    
+set_video_speed_form:
+    path:     /setVideoSpeed
+    defaults: { _controller: PlayBannerBundle:Default:setVideoSpeed }
+    methods:  POST
+    
+get_another_video_form:
+    path:     /getAnotherVideo
+    defaults: { _controller: PlayBannerBundle:Default:getAnotherVideo }
+    methods:  POST

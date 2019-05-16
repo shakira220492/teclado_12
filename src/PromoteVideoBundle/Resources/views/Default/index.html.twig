@@ -1,0 +1,56 @@
+<div>
+    <div style="position: absolute; top: 0px; left: 0px; height: 30px; width: 100%; text-align: center;">
+        PROMOTE VIDEO
+    </div>
+
+    <div id="videoImage_promoteVideoBundle">
+        <img id='image_promoteVideoBundle'  
+            src='files/Captura de pantalla 2018-12-01 a la(s) 2.12.14 p.m..png' 
+            alt='Mountain View'>
+    </div>
+
+    <div id="videoInformation_promoteVideoBundle">
+    </div>
+    
+    <div id="amountOfCoins_promoteVideoBundle">
+        <label id="la">Amount of coins: </label>
+        <input id="in" type=number name="target_coin_amount" size="15" placeholder="Amount of coins"/>
+    </div>
+    
+    <div {#id="payment_options"#} style="position: absolute; top: 300px; left: 30px; right: 0px;">
+        {{ include('@Paypal/Default/index.html.twig') }}
+        {{ include('@PayU/Default/index.html.twig') }}
+    </div>
+</div>
+
+
+
+
+
+<script>
+    
+    function PromoteVideoBundle()
+    {
+        {#alert("PromoteVideoBundle");#}
+                
+        var image_promoteVideoBundle = document.getElementById("image_promoteVideoBundle");
+        image_promoteVideoBundle.src = "files/"+edit_video_image;
+        
+        var videoInformation_promoteVideoBundle = document.getElementById("videoInformation_promoteVideoBundle");
+        videoInformation_promoteVideoBundle.innerHTML = 
+            "Name: "+edit_video_name+".<br>"+
+            "Update date: "+edit_video_updateDate+"<br>"+
+            "Views: "+edit_video_amount_views+"<br>"+
+            "Comments: "+edit_video_amount_comments+"<br>"+
+            "Likes: "+edit_video_likes+"<br>"+
+            "Dislikes: "+edit_video_dislikes+"<br>"+
+            "Amount of coins: "+edit_video_coin_score+"<br>";
+    }
+    
+    function increase_videoCoinScore(edit_video_id)
+    {
+        
+    }
+    
+    
+</script>    

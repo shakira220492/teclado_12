@@ -1,0 +1,61 @@
+<?php
+
+namespace HomeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Saledetail
+ *
+ * @ORM\Table(name="saleDetail", indexes={@ORM\Index(name="sale_id", columns={"sale_id"}), @ORM\Index(name="product_id", columns={"product_id"})})
+ * @ORM\Entity
+ */
+class Saledetail
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="saleDetail_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $saledetailId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sale_id", type="integer", nullable=false)
+     */
+    private $saleId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="product_id", type="integer", nullable=false)
+     */
+    private $productId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="saleDetail_unitPrice", type="decimal", precision=20, scale=2, nullable=false)
+     */
+    private $saledetailUnitprice;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="saleDetail_amount", type="integer", nullable=false)
+     */
+    private $saledetailAmount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="saleDetail_download", type="integer", nullable=false)
+     */
+    private $saledetailDownload;
+
+
+}
+

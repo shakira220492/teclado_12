@@ -1,0 +1,19 @@
+add_to_shopping_cart_form:
+    path:     /addToShoppingCart
+    defaults: { _controller: StoreBundle:Default:addToShoppingCart }
+    methods:  POST
+    
+get_products_form:
+    path:     /getProducts
+    defaults: { _controller: StoreBundle:Default:getProductsForm }
+    methods:  POST
+    
+delete_selected_product_form:
+    path:     /deleteSelectedProduct
+    defaults: { _controller: StoreBundle:Default:deleteSelectedProduct }
+    methods:  POST
+    
+get_selected_products_form:
+    path:     /getSelectedProducts
+    defaults: { _controller: StoreBundle:Default:getSelectedProducts }
+    methods:  POST

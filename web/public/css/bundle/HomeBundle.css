@@ -1,0 +1,248 @@
+#window_background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    z-index: 2;
+}
+
+#emergentWindow {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+    position: absolute;
+    transition: 0.6s;
+}
+
+div#presentationArea {
+    background-color: transparent;
+    position: absolute;
+    z-index: 2;
+    right: 180px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+
+
+
+#searchArea {
+    position: absolute;
+    z-index: 4;
+    right: 0px;
+    bottom: 40px;
+    top: 0px;
+    width: 180px;
+    transition-property: all; 
+    transition-duration: 0.5s;
+}
+
+#sessionMenu {
+    position: absolute;
+    z-index: 4;
+    top: 0px;
+    height: 50px;
+    right: 180px;
+    width: 360px;
+    overflow: hidden;
+/*    color: gray;*/
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+#sessionArea {
+    position: absolute;
+    z-index: 3;
+    top: 50px;
+    bottom: 40px;
+    right: 180px;
+    width: 360px;
+    overflow: hidden;
+/*    color: gray;*/
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+#configurationArea {
+    position: absolute;
+    width: 180px;
+    top: 0px;
+    bottom: 40px;
+    right: 540px;
+    z-index: 3;
+    overflow: hidden;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+
+#lyricsArea {
+    position: absolute;
+    z-index: 3;
+    top: 265px;
+    bottom: 40px;
+    left: 15px;
+    right: 900px;
+    overflow: hidden;
+    opacity: 1;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /*background-color: #1ab7ea;*/
+}
+
+#playBanner {
+    position: absolute;
+/*    opacity: 0.2;
+    background-color: gray;*/
+    height: 40px;
+    right: 0px; 
+    bottom: 0px;
+    left: 0px;
+    z-index: 5;
+}
+
+
+#configurationBar {
+    position: absolute;
+    z-index: 4;
+    left: 10px;
+    width: 30px;
+    top: 0px;
+    bottom: 40px;
+    transition-property: all;
+    transition-duration: 2s;
+/*    background-color: tomato;*/
+}
+
+
+
+
+
+
+/* SCROLLBAR: */
+/* width */
+.visibleScroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.visibleScroll::-webkit-scrollbar-track {
+    background: white;
+}
+
+/* Handle */
+.visibleScroll::-webkit-scrollbar-thumb {
+    background: #1ab7ea; 
+}
+
+/* Handle on hover */
+.visibleScroll::-webkit-scrollbar-thumb:hover {
+    background: gray; 
+}
+
+
+
+/*@media (min-width: 600px) {
+    body {
+        background-color: green;
+    }
+    
+    
+    #window_background {
+        background-color: green;
+    }
+    
+    #configurationArea_content {
+        color: green;
+    }
+    
+    #sessionArea {
+        color: green;
+    }
+    
+    #searchArea {
+        color: green;
+    }
+    
+}
+
+
+@media (min-width: 800px) {
+    body {
+        background-color: red;
+    }
+    
+    #window_background {
+        background-color: red;
+    }
+    
+    #configurationArea_content {
+        color: red;
+    }
+    
+    #sessionArea {
+        color: red;
+    }
+    
+    #searchArea {
+        color: red;
+    }
+    
+}*/
+
+/*min-width
+max-width*/
+
+
+
+
+
+
+.claro {
+    /*text-transform: uppercase;*/
+    color: rgba(0, 0, 0, 1);
+    font-weight: 600;
+    font-stretch: ultra-expanded;
+    text-shadow: 
+        3px 0 0 rgba(255, 255, 255, 0.1), 
+        -3px 0 0 rgba(255, 255, 255, 0.1), 
+        0 3px 0 rgba(255, 255, 255, 0.1), 
+        0 -3px 0 rgba(255, 255, 255, 0.1), 
+        
+        2px 0 0 rgba(255, 255, 255, 0.1), 
+        -2px 0 0 rgba(255, 255, 255, 0.1), 
+        0 2px 0 rgba(255, 255, 255, 0.1), 
+        0 -2px 0 rgba(255, 255, 255, 0.1), 
+        
+        1px 1px rgba(255, 255, 255, 0.1), 
+        -1px -1px 0 rgba(255, 255, 255, 0.1), 
+        1px -1px 0 rgba(255, 255, 255, 0.1), 
+        -1px 1px 0 rgba(255, 255, 255, 0.1)
+}
+
+.oscuro {
+/*    text-transform: uppercase;*/
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+    font-stretch: ultra-expanded;
+    text-shadow: 
+        3px 0 0 rgba(255, 255, 255, 0.1), 
+        -3px 0 0 rgba(255, 255, 255, 0.1), 
+        0 3px 0 rgba(255, 255, 255, 0.1), 
+        0 -3px 0 rgba(255, 255, 255, 0.1), 
+        
+        2px 0 0 rgba(0, 0, 0, 0.1), 
+        -2px 0 0 rgba(0, 0, 0, 0.1), 
+        0 2px 0 rgba(0, 0, 0, 0.1), 
+        0 -2px 0 rgba(0, 0, 0, 0.1), 
+        
+        1px 1px rgba(0, 0, 0, 0.1), 
+        -1px -1px 0 rgba(0, 0, 0, 0.1), 
+        1px -1px 0 rgba(0, 0, 0, 0.1), 
+        -1px 1px 0 rgba(0, 0, 0, 0.1)
+}

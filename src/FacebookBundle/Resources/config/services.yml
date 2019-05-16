@@ -1,0 +1,4 @@
+services:
+#    facebook.example:
+#        class: FacebookBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

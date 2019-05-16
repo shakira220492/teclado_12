@@ -1,0 +1,284 @@
+{{ form_start(get_comment_about_video_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-comment-about-video-ajax'|default('form')} }) }}
+{{ form_end(get_comment_about_video_form_ajax) }}
+
+{{ form_start(get_comments_about_video_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-comments-about-video-ajax'|default('form')} }) }}
+{{ form_end(get_comments_about_video_form_ajax) }}
+
+{{ form_start(add_comment_video_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'add-comment-video-ajax'|default('form')} }) }}
+{{ form_end(add_comment_video_form_ajax) }}
+
+{{ form_start(increase_comments_amount_video_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'increase-comments-amount-video-ajax'|default('form')} }) }}
+{{ form_end(increase_comments_amount_video_form_ajax) }}
+
+
+
+<img id='zoomCommentSection' class="animatedButton" data-id1="close" 
+ src='files/images/icons/video/zoomCommentSection.png' 
+ alt='Mountain View'>
+
+
+
+
+
+
+
+
+
+<div id='writeACommentSection'>
+    <textarea id="inputSection"
+        placeholder="Write here your comment... "></textarea>
+    <img id='sendComment' class="animatedButton"
+     src='files/images/icons/video/sendComment.png' 
+     alt='Mountain View'>
+</div>
+
+
+
+
+<img id="presentationComment" class="animatedButton"
+     src='files/images/icons/dinamic.png' 
+     alt='Mountain View'>
+
+<div id='dinamicCommentVideoSection'>
+    <div id="commentVideoFrame">
+        {#<div class='commentVideo'>
+        </div>#}
+    </div>
+</div>
+
+<div id='staticCommentVideoSection' {#class="visibleScroll"#}>
+    {#<div class='commentVideo'>
+    </div>#}
+</div>
+
+<script>
+
+    $("#sendComment").click(function () {
+        var commentContent = document.getElementById("inputSection").value;
+        if (commentContent) {
+            sendCommentFunction();
+        }
+        else {
+            var message = "Write something to comment.";
+            showMessage_EmergentWindow(message);
+        }
+    });
+    
+    $("#zoomCommentSection").click(function () {
+        var zoomCommentSection_status = $("#zoomCommentSection").data('id1');
+        
+        if (zoomCommentSection_status === "close")
+        {
+            $("#zoomCommentSection").data('id1', "open");
+{#            document.getElementById("sendComment").style.top = "70px";
+            document.getElementById("sendComment").style.display = "block";
+            document.getElementById("sendCommentButton").src = "files/images/icons/video/openComment.png";#}
+            
+            document.getElementById("writeACommentSection").style.height = "100px";
+            document.getElementById("dinamicCommentVideoSection").style.top = "100px";
+            document.getElementById("staticCommentVideoSection").style.top = "100px";
+        } else if (zoomCommentSection_status === "open")
+        {
+            $("#zoomCommentSection").data('id1', "close");
+{#            document.getElementById("sendComment").style.top = "0px";
+            document.getElementById("sendComment").style.display = "none";
+            document.getElementById("sendCommentButton").src = "files/images/icons/video/sendComment.png";#}
+            
+            document.getElementById("writeACommentSection").style.height = "0px";
+            document.getElementById("dinamicCommentVideoSection").style.top = "0px";
+            document.getElementById("staticCommentVideoSection").style.top = "0px";
+        }
+    });
+    
+    
+    
+    $("#staticCommentVideoSection")
+    .scroll(function () {
+        var staticCommentVideoSection = document.getElementById("staticCommentVideoSection");
+
+        var a = staticCommentVideoSection.scrollHeight;
+        var b = staticCommentVideoSection.scrollTop;
+        var c = staticCommentVideoSection.clientHeight;
+
+        if (b+c === a)
+        {
+            startPositionComments_static += 30;
+            staticComments(); 
+        }
+    })
+    .mouseover(function () {
+        var staticCommentVideoSection = document.getElementById("staticCommentVideoSection");
+        staticCommentVideoSection.classList.add("visibleScroll");
+    })
+    .mouseout(function () {
+        var staticCommentVideoSection = document.getElementById("staticCommentVideoSection");
+        staticCommentVideoSection.classList.remove("visibleScroll");
+    });
+    
+    
+
+    function sendCommentFunction()
+    {
+        var form = $('#add-comment-video-ajax');
+        var url = form.attr('action');
+
+        var commentContent = document.getElementById("inputSection").value;
+        
+        $.post(url, {
+            current_video_id: current_video_id,
+            commentContent: commentContent
+        }, function (data)
+        {
+            var status = data[0].status;
+            if (status === "0")
+            {
+                var message = "You need to log in to comment at this video.";
+                showMessage_EmergentWindow(message);
+            } else if (status === "1")
+            {
+                document.getElementById("inputSection").value = "";
+                increaseCommentsAmount();
+            }
+            
+        }).fail(function () {
+            alert('ERROR #add-comment-video-ajax');
+        });
+    }
+    
+    function increaseCommentsAmount()
+    {
+        var form = $('#increase-comments-amount-video-ajax');
+        var url = form.attr('action');
+        
+        $.post(url, {current_video_id: current_video_id}, function (data)
+        {
+            var status = data[0].status;
+            if (status === "0")
+            {
+                var message = "You need to log in to comment at this video.";
+                showMessage_EmergentWindow(message);
+            }
+        }).fail(function () {
+            alert('ERROR #increase-comments-amount-video-ajax');
+        });
+    }
+    
+    $("#presentationComment").click(function () {
+        animarComentarios();
+    });
+    
+    function animarComentarios()
+    {
+        if (windowModecomments === 0)
+        {
+            document.getElementById("presentationComment").src = "files/images/icons/dinamic.png";
+            document.getElementById("dinamicCommentVideoSection").style.display = "block";
+            document.getElementById("staticCommentVideoSection").style.display = "none";
+            windowModecomments = 1;
+            dinamicComments();
+        } else if (windowModecomments ===1)
+        {
+            document.getElementById("presentationComment").src = "files/images/icons/static.png";
+            document.getElementById("dinamicCommentVideoSection").style.display = "none";
+            document.getElementById("staticCommentVideoSection").style.display = "block";
+            windowModecomments = 0;
+            staticComments();
+        }
+    }
+
+    function dinamicComments()
+    {
+        var startPositionComments = 0;
+        var amountComments = 1;
+        asignarValores = setInterval(function() {
+            
+            startPositionComments++;
+    
+            getCommentFromDatabase(startPositionComments, amountComments);
+            
+            comentVideoFrame_bottom+=100;
+            
+            var commentVideoFrame = document.getElementById("commentVideoFrame");
+            commentVideoFrame.style.bottom = comentVideoFrame_bottom+"px";
+            
+            $("#commentVideoFrame").append(
+                "<div class='commentVideo'>"+
+                    commentContent+
+                "</div>"
+            );
+                        
+        }, 4000);
+    }
+    
+    function getCommentFromDatabase(startPositionComments, amountComments)
+    {
+        var form = $('#get-comment-about-video-ajax');
+        var url = form.attr('action');
+
+        $.post(url,
+        {
+            current_video_id: current_video_id,
+            startPositionComments: startPositionComments,
+            amountComments: amountComments
+        },
+        function (data)
+        {
+            commentId = data[0].commentId;
+            commentContent = data[0].commentContent;
+            commentLikes = data[0].commentLikes;
+            commentDislikes = data[0].commentDislikes;
+            commentCreationdate = data[0].commentCreationdate;
+            commentUserId = data[0].userId;
+            commentUserName = data[0].userName;
+            commentVideoId = data[0].videoId;
+            commentVideoAmountComments = data[0].videoAmountComments;
+            
+        }).fail(function () {
+            
+        });
+    }
+    
+    function staticComments()
+    {
+        clearInterval(asignarValores);
+        getCommentFromDatabase_2(startPositionComments_static, amountComments_static);
+        
+    }
+    
+    function getCommentFromDatabase_2(startPositionComments, amountComments)
+    {
+        var form = $('#get-comments-about-video-ajax');
+        var url = form.attr('action');
+        
+        $.post(url,
+        {
+            current_video_id: current_video_id,
+            startPositionComments: startPositionComments,
+            amountComments: amountComments
+        },
+        function (data)
+        {
+
+            var amountCommentsFound = data[0].amountCommentsFound;
+            
+            for(i=0; i<=amountCommentsFound; i++)
+            {
+                var commentId = data[i].commentId;
+                var commentContent = data[i].commentContent;
+                var commentLikes = data[i].commentLikes;
+                var commentDislikes = data[i].commentDislikes;
+                var commentCreationdate = data[i].commentCreationdate;
+                var userName = data[i].userName;
+                
+                $("#staticCommentVideoSection").append(
+                    "<div class='commentVideo'>"+
+                        commentContent+
+                    "</div>"
+                );
+            }
+            
+        }).fail(function () {
+            
+        });
+    }
+</script>

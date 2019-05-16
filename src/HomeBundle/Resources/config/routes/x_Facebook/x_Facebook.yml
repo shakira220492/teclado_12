@@ -1,0 +1,7 @@
+facebook_form:
+    path:     /facebook
+    defaults: { _controller: FacebookBundle:Facebook:facebookForm }
+    
+successLogin_form:
+    path:     /successLogin
+    defaults: { _controller: FacebookBundle:Facebook:successLoginForm }

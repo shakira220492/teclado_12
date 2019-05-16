@@ -1,0 +1,68 @@
+<?php
+
+namespace HomeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sale
+ *
+ * @ORM\Table(name="sale")
+ * @ORM\Entity
+ */
+class Sale
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sale_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $saleId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sale_transactionKey", type="string", length=250, nullable=false)
+     */
+    private $saleTransactionkey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sale_paypalData", type="text", length=65535, nullable=false)
+     */
+    private $salePaypaldata;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="sale_date", type="datetime", nullable=false)
+     */
+    private $saleDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sale_email", type="string", length=5000, nullable=false)
+     */
+    private $saleEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sale_total", type="decimal", precision=60, scale=0, nullable=false)
+     */
+    private $saleTotal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sale_status", type="string", length=200, nullable=false)
+     */
+    private $saleStatus;
+
+
+}
+

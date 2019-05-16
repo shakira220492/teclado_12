@@ -1,0 +1,13 @@
+
+#historySongs {
+    position: absolute;
+    z-index: 3;
+    right: 0px;
+    width: 180px;
+    top: 30px;
+    bottom: 0px;
+    overflow-y: scroll;
+    font-size: small;
+    transition-property: all; 
+    transition-duration: 0.5s;
+}

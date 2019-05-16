@@ -1,0 +1,3 @@
+payU_form:
+    path:     /payu
+    defaults: { _controller: PayUBundle:PayU:PayUForm }

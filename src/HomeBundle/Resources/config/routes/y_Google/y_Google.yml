@@ -1,0 +1,7 @@
+google_form:
+    path:     /google
+    defaults: { _controller: GoogleBundle:Google:googleForm }
+    
+successLoginGoogle_form:
+    path:     /successLoginGoogle
+    defaults: { _controller: GoogleBundle:Google:successLoginGoogleForm }

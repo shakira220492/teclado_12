@@ -1,0 +1,42 @@
+#StoreBundle
+paypal_form:
+    path:     /paypal
+    defaults: { _controller: PaypalBundle:Paypal:paypalForm }
+    
+paypal_success_form:
+    path:     /success
+    defaults: { _controller: PaypalBundle:Paypal:success }
+    
+paypal_failure_form:
+    path:     /failure
+    defaults: { _controller: PaypalBundle:Paypal:failure }
+        
+#VIDEO COIN SCORE
+#PromoteVideoBundle
+
+promotedVideo_form:
+    path:     /promotedVideo
+    defaults: { _controller: PaypalBundle:PromotedVideo:promotedVideoForm }
+    
+promotedVideo_success_form:
+    path:     /promotedVideoSuccess
+    defaults: { _controller: PaypalBundle:PromotedVideo:promotedVideoSuccess }
+    
+promotedVideo_failure_form:
+    path:     /promotedVideoFailure
+    defaults: { _controller: PaypalBundle:PromotedVideo:promotedVideoFailure }
+    
+#DONATE
+#DonateBundle
+    
+donatedVideo_form:
+    path:     /donatedVideo
+    defaults: { _controller: PaypalBundle:DonatedVideo:donatedVideoForm }
+    
+donatedVideo_success_form:
+    path:     /donatedVideoSuccess
+    defaults: { _controller: PaypalBundle:DonatedVideo:donatedVideoSuccess }
+    
+donatedVideo_failure_form:
+    path:     /donatedVideoFailure
+    defaults: { _controller: PaypalBundle:DonatedVideo:donatedVideoFailure }
